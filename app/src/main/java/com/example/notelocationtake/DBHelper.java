@@ -11,21 +11,30 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "Notes.db";
     public static final String TABLE_NAME = "NotesTable";
     public static final String ID = "ID";
-    public static final String Title = "Title";
-    public static final String Content = "Content";
-    public static final String Address = "Address";
+    public static final String TITLE = "Title";
+    public static final String CONTENT = "Content";
+    public static final String ADDRESS = "Address";
 
-    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DBHelper(Context context) {
+        super(context, DB_NAME, null, 1);
+        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE "+TABLE_NAME+
+                "("+
+                        ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                        TITLE+" TEXT,"+
+                        CONTENT+" TEXT,"+
+                        ADDRESS+" TEXT"+
+                ")"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
     }
 }
