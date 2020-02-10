@@ -12,6 +12,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "NotesTable";
     public static final String ID = "ID";
     public static final String TITLE = "Title";
+    public static final String DATE = "Date";
+    public static final String TIME = "Time";
     public static final String CONTENT = "Content";
     public static final String ADDRESS = "Address";
 
@@ -28,6 +30,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
                         TITLE+" TEXT,"+
                         CONTENT+" TEXT,"+
+                        DATE+" TEXT,"+
+                        TIME+" TEXT,"+
                         ADDRESS+" TEXT"+
                 ")"
         );
