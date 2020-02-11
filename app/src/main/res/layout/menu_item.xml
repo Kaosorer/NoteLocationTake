@@ -1,45 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="6dp"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        android:padding="5dp">
 
         <TextView
-            android:id="@+id/textViewTitle"
+            android:id="@+id/textViewTitleItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
-            android:text="Title"
             android:layout_marginBottom="4dp"
-            />
+            android:text="Title"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textViewLocationItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Location"
+            android:textSize="20dp" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textViewDate"
+                android:id="@+id/textViewDateItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date/Time"
+                android:paddingRight="10dp"
+                android:text="Date"
 
                 />
 
             <TextView
-                android:id="@+id/textViewLocation"
+                android:id="@+id/dateTimeSeparatorItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Location" />
-        </LinearLayout>
+                android:layout_toRightOf="@id/textViewDateItem"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/textViewTimeItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/dateTimeSeparatorItem"
+                android:paddingLeft="10dp"
+                android:text="Time" />
+
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

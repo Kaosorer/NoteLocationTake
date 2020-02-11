@@ -1,10 +1,12 @@
 package com.example.notelocationtake;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,13 +56,32 @@ public class AddNote extends AppCompatActivity {
                 Note note = new Note(editTextTitle.getText().toString(),editTextContent.getText().toString(), dateToday, currentTime);
                 DBHelper dbHelper = new DBHelper(AddNote.this);
                 dbHelper.addNote(note);
+                Toast.makeText(AddNote.this, "Note Saved!",Toast.LENGTH_SHORT).show();
+                goToMain();
 
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(AddNote.this,"Note Not Saved!", Toast.LENGTH_SHORT);
+                goToMain();
             }
         });
 
     }
 
+    private void goToMain() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     private String ShortForm(int i){
         if (i==Calendar.JANUARY){

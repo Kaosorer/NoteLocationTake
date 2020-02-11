@@ -1,6 +1,7 @@
 package com.example.notelocationtake;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,9 +11,13 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    Adapter adapter;
+    List<Note> noteList;
 
 
     @Override
@@ -21,7 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        DBHelper dbHelper = new DBHelper(this);
+        noteList = dbHelper.getNotes();
+
         recyclerView = findViewById(R.id.noteRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Adapter(this,noteList);
+        recyclerView.setAdapter(adapter);
+
 
         FloatingActionButton addNoteFAB = findViewById(R.id.addNewNoteFAB);
         addNoteFAB.setOnClickListener(new View.OnClickListener() {
