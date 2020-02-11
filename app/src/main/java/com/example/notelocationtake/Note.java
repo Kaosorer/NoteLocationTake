@@ -13,7 +13,7 @@ public class Note {
 
     }
 
-    Note(String title, String content, String date, String time, String address){
+    Note(String title, String content, String date, String time, String address){//Address constructor
 
         this.Title = title;
         this.Content = content;
@@ -23,16 +23,18 @@ public class Note {
 
     }
 
-    Note(String title, String content, String date, String time){
+    Note(String title, String content, String date, String time){//No Address constructor
 
         this.Title = title;
         this.Content = content;
         this.Date = date;
         this.Time = time;
+        this.Address = "Unknown Address";
+
 
     }
 
-    Note(long id, String title, String content, String date, String time, String address){
+    Note(long id, String title, String content, String date, String time, String address){//ID+Address constructor
 
         this.ID = id;
         this.Title = title;
@@ -43,13 +45,14 @@ public class Note {
 
     }
 
-    Note(long id, String title, String content, String date, String time){
+    Note(long id, String title, String content, String date, String time){ //ID+No Address constructor
 
         this.ID = id;
         this.Title = title;
         this.Content = content;
         this.Date = date;
         this.Time = time;
+        this.Address = "Unknown Address";
 
     }
 

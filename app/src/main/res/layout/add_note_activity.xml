@@ -6,37 +6,61 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextTitle"
+    <LinearLayout
+        android:id="@+id/topRowContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/colorPrimary"
         android:background="@color/colorPrimary"
-        android:ems="10"
-        android:hint="Title"
-        android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textSize="24dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        >
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:ems="10"
+            android:hint="Enter Title"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_weight="19"
+            android:textSize="24dp"
+            />
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Cancel"
+            />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editTextContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@null"
         android:ems="10"
         android:gravity="top"
         android:hint="Type something here..."
         android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@id/dateTimeAddressBlock"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateTimeAddressBlock" />
 
     <LinearLayout
         android:background="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/editTextTitle"
+        app:layout_constraintTop_toBottomOf="@id/topRowContainer"
         android:id="@+id/dateTimeAddressBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
 
         <LinearLayout
 
@@ -72,6 +96,7 @@
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:text="Address"
+            android:padding="5dp"
             />
     </LinearLayout>
 

@@ -1,8 +1,11 @@
 package com.example.notelocationtake;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -10,11 +13,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "Notes.db";
     public static final String TABLE_NAME = "NotesTable";
+
     public static final String ID = "ID";
     public static final String TITLE = "Title";
+    public static final String CONTENT = "Content";
     public static final String DATE = "Date";
     public static final String TIME = "Time";
-    public static final String CONTENT = "Content";
     public static final String ADDRESS = "Address";
 
     public DBHelper(Context context) {
@@ -40,5 +44,20 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        onCreate(sqLiteDatabase);
+    }
+
+    public long addNote(Note note){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TITLE,note.getTitle());
+        contentValues.put(CONTENT,note.getContent());
+        contentValues.put(DATE,note.getDate());
+        contentValues.put(TIME,note.getTime());
+
+        long ID = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        Log.d("Inserted","ID = "+ID);
+        return ID;
+
     }
 }
