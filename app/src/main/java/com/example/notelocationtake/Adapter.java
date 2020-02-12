@@ -1,6 +1,7 @@
 package com.example.notelocationtake;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             itemDate = itemView.findViewById(R.id.textViewDateItem);
             itemTime = itemView.findViewById(R.id.textViewTimeItem);
             itemAddress = itemView.findViewById(R.id.textViewLocationItem);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //Toast.makeText(view.getContext(),"Menu Item Clicked",Toast.LENGTH_SHORT).show();//Test menu item click
+
+                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                    intent.putExtra("ID",noteList.get(getAdapterPosition()).getID());
+                    view.getContext().startActivity(intent);
+
+                }
+            });
+
         }
     }
 }

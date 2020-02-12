@@ -66,12 +66,17 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Note getNote(long id){
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, new String[]{ID,TITLE,CONTENT,DATE,TIME,ADDRESS},ID+"=?",new String[]{String.valueOf(ID)},null,null,null);
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, new String[]{ID,TITLE,CONTENT,DATE,TIME,ADDRESS},ID+"=?",new String[]{String.valueOf(id)},null,null,null);
         if(cursor!=null){
             cursor.moveToFirst();
         }
-        return new Note(cursor.getLong(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getColumnName(4),cursor.getString(5));
+        return new Note(cursor.getLong(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5));
     }
 
     public List<Note> getNotes(){
@@ -98,6 +103,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return allNotes;
 
+    }
+
+    void deleteNote(long id){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME,ID+"=?", new String[]{String.valueOf(id)});
+        sqLiteDatabase.close();
     }
 
 }
