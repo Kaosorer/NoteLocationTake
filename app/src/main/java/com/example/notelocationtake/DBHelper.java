@@ -59,6 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(CONTENT,note.getContent());
         contentValues.put(DATE,note.getDate());
         contentValues.put(TIME,note.getTime());
+        contentValues.put(ADDRESS,note.getAddress());
 
         long ID = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         Log.d("Inserted","ID = "+ID);

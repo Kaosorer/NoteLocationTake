@@ -31,6 +31,7 @@ public class EditNoteActivity extends AppCompatActivity {
         textViewDateEN = findViewById(R.id.textViewDateEditNote);
         textViewTimeEN = findViewById(R.id.textViewTimeEditNote);
         textViewAddressEN = findViewById(R.id.textViewAddressEditNote);
+
         Button buttonCancelEditNote = findViewById(R.id.buttonCancelEditNote);
         FloatingActionButton noteSaveUpdateFAB = findViewById(R.id.updateSaveFAB);
 

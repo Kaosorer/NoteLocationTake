@@ -36,6 +36,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Cancel"
+            android:textColor="#FFF"
+            android:backgroundTint="@color/colorAccent"
             />
 
     </LinearLayout>
@@ -108,10 +110,10 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="5dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorAccent"
         android:background="@color/colorPrimary"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_save"
+        android:src="@drawable/ic_save_white_40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

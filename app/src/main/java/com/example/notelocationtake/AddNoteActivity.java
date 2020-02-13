@@ -1,7 +1,11 @@
 package com.example.notelocationtake;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +15,24 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddNoteActivity extends AppCompatActivity {
+
+    Geocoder geocoder;
+
+    private FusedLocationProviderClient client;
+    List<Address> addressList;
 
     TextView textViewDate, textViewTime, textViewAddress;
     EditText editTextTitle, editTextContent;
@@ -25,9 +42,14 @@ public class AddNoteActivity extends AppCompatActivity {
     Calendar c;
     String dateToday;
     String currentTime;
+    String currentLocation = "Unknown Location";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        geocoder = new Geocoder(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note_activity);
 
@@ -46,15 +68,37 @@ public class AddNoteActivity extends AppCompatActivity {
         dateToday = Pad(c.get(Calendar.DAY_OF_MONTH))+Ordinal(c.get(Calendar.DAY_OF_MONTH))+" "+ShortForm(c.get(Calendar.MONTH))+" "+c.get(Calendar.YEAR);//date in dd MMM yyyy format: e.g, 21st January 2020
         currentTime = Pad(c.get(Calendar.HOUR))+":"+Pad(c.get(Calendar.MINUTE));
 
+        client = LocationServices.getFusedLocationProviderClient(this);
+        client.getLastLocation().addOnSuccessListener(AddNoteActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+
+                if (location != null){
+                    try {
+                        Log.d("LocationLocation", currentLocation);
+                        Log.d("LocationLocation",location.toString());
+                        addressList = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),3);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    currentLocation = addressList.get(0).getAddressLine(0);
+                    textViewAddress.setText(currentLocation);
+                    Log.d("LocationLocation", currentLocation);
+                }
+            }
+        });
+
         textViewDate.setText(dateToday);
         textViewTime.setText(currentTime);
+        textViewAddress.setText(currentLocation);
 
         noteSaveFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(editTextTitle.getText().length() != 0){
-                    Note note = new Note(editTextTitle.getText().toString(),editTextContent.getText().toString(), dateToday, currentTime);
+                    Log.d("LocationLocation", currentLocation);
+                    Note note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), dateToday, currentTime, currentLocation);
                     DBHelper dbHelper = new DBHelper(AddNoteActivity.this);
                     dbHelper.addNote(note);
                     Toast.makeText(AddNoteActivity.this, "Note Saved!",Toast.LENGTH_SHORT).show();
@@ -76,6 +120,7 @@ public class AddNoteActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void goToMain() {
         Intent i = new Intent(this, MainActivity.class);
