@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 
-public class AddNote extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity {
 
     TextView textViewDate, textViewTime, textViewAddress;
     EditText editTextTitle, editTextContent;
@@ -53,12 +53,16 @@ public class AddNote extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Note note = new Note(editTextTitle.getText().toString(),editTextContent.getText().toString(), dateToday, currentTime);
-                DBHelper dbHelper = new DBHelper(AddNote.this);
-                dbHelper.addNote(note);
-                Toast.makeText(AddNote.this, "Note Saved!",Toast.LENGTH_SHORT).show();
-                goToMain();
-
+                if(editTextTitle.getText().length() != 0){
+                    Note note = new Note(editTextTitle.getText().toString(),editTextContent.getText().toString(), dateToday, currentTime);
+                    DBHelper dbHelper = new DBHelper(AddNoteActivity.this);
+                    dbHelper.addNote(note);
+                    Toast.makeText(AddNoteActivity.this, "Note Saved!",Toast.LENGTH_SHORT).show();
+                    goToMain();
+                }
+                else {
+                    Toast.makeText(AddNoteActivity.this,"You cannot leave the title empty!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -66,7 +70,7 @@ public class AddNote extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(AddNote.this,"Note Not Saved!", Toast.LENGTH_SHORT);
+                Toast.makeText(AddNoteActivity.this,"Note Not Saved!", Toast.LENGTH_SHORT);
                 goToMain();
             }
         });

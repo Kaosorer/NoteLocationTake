@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.CaseMap;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -103,6 +104,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return allNotes;
 
+    }
+
+    public int editNote(Note note){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(TITLE,note.getTitle());
+        contentValues.put(CONTENT,note.getContent());
+        contentValues.put(DATE,note.getDate());
+        contentValues.put(TIME,note.getTime());
+        contentValues.put(ADDRESS,note.getAddress());
+
+        return sqLiteDatabase.update(TABLE_NAME,contentValues,ID+"=?",new String[]{String.valueOf(note.getID())});
     }
 
     void deleteNote(long id){

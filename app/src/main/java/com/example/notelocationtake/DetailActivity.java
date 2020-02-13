@@ -2,6 +2,7 @@ package com.example.notelocationtake;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
 
         titleEA.setText(note.getTitle());
         contentEA.setText(note.getContent());
+        contentEA.setMovementMethod(new ScrollingMovementMethod());
         dateEA.setText(note.getDate());
         timeEA.setText(note.getTime());
         addressEA.setText(note.getAddress());
@@ -57,6 +59,10 @@ public class DetailActivity extends AppCompatActivity {
         deleteNoteFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent(DetailActivity.this,EditNoteActivity.class);
+                intent.putExtra("ID",note.getID());
+                startActivity(intent);
 
             }
         });

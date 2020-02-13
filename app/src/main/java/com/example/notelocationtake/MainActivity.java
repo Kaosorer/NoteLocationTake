@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(MainActivity.this,"Button Clicked", Toast.LENGTH_SHORT).show();//Test FAB functionality
 
-                startActivity(new Intent(MainActivity.this, AddNote.class));
+                startActivity(new Intent(MainActivity.this, AddNoteActivity.class));
 
             }
         });

@@ -48,7 +48,12 @@
         android:gravity="top"
         android:text="Content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateTimeAddressBlock" />
+        app:layout_constraintTop_toBottomOf="@id/dateTimeAddressBlock"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
 
     <LinearLayout
         android:background="@color/colorPrimary"
